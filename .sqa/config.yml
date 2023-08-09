@@ -1,0 +1,58 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.11
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/cessda/cessda.cdc.fuji.runner:
+      branch: main
+      repo: https://github.com/cessda/cessda.cdc.fuji.runner.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/cessda/cessda.cdc.fuji.runner git:
+        commands:
+        - /usr/bin/env sh .sqa/script.smelly-celadon-newfoundland.sh
+        container: qc.acc_skanky-orange-otter
+  QC.Doc:
+    repos:
+      github.com/cessda/cessda.cdc.fuji.runner find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.surly-lime-chimpanzee.sh
+        container: qc.doc_lovely-buff-spider
+      github.com/cessda/cessda.cdc.fuji.runner git:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaky-amber-zebra.sh
+        container: qc.doc_hazy-lavender-gecko
+      github.com/cessda/cessda.cdc.fuji.runner markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.skimpy-amethyst-jackal.sh
+        container: qc.doc_sleazy-white-skunk
+  QC.Lic:
+    repos:
+      github.com/cessda/cessda.cdc.fuji.runner licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.craggy-olivine-fish.sh
+        container: qc.lic_wiggy-copper-fly
+  QC.Met:
+    repos:
+      github.com/cessda/cessda.cdc.fuji.runner cff-converter-python:
+        commands:
+        - /usr/bin/env sh .sqa/script.breezy-heliotrope-lemur.sh
+        container: qc.met_craggy-amaranth-frigatebird
+  QC.Sty:
+    repos:
+      github.com/cessda/cessda.cdc.fuji.runner jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.sleepy-red-squirrel.sh
+        container: qc.sty_shaky-zucchini-ferret
+  QC.Ver:
+    repos:
+      github.com/cessda/cessda.cdc.fuji.runner get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.muzzy-bronze-camel.sh
+        container: qc.ver_chummy-plum-opossum
+timeout: 5400
